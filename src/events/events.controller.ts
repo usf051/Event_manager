@@ -3,6 +3,8 @@ import { EventsService } from './events.service';
 import { CreateEventDto } from './dto/create-event.dto';
 import { UpdateEventDto } from './dto/update-event.dto';
 import { CreateCompensationEventDto } from './dto/create-compensation_event.dto';
+import { RecordDto } from './dto/record.dto';
+import { TaskDto } from './dto/task.dto';
 
 @Controller('events')
 export class EventsController {
@@ -63,10 +65,31 @@ export class EventsController {
     const event = await this.eventsService.comp_create(id,data);
     return {
       statusCode : HttpStatus.OK,
-      message : 'created event',
+      message : 'created compesation event',
       event,
     }
   }
+
+  @Post('record/:id')
+  async create_record(@Param('id') id: number, @Body() data: RecordDto) {
+    const record = await this.eventsService.record_create(id,data);
+    return {
+      statusCode : HttpStatus.OK,
+      message : 'created record',
+      record,
+    };
+  }
+
+  @Post('task/:id')
+  async create_task(@Param('id') id: number, @Body() data: TaskDto) {
+    const task = await this.eventsService.task_create(id,data);
+    return {
+      statusCode : HttpStatus.OK,
+      message : 'created task',
+      task,
+    };
+  }
+
 }
 
 

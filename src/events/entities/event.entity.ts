@@ -1,5 +1,7 @@
 import { Column, Entity, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
 import { CompensationEvent }  from '../entities/compensation_event.entity';
+import { Record }  from '../entities/record.entity';
+import { Task }  from '../entities/task.entity';
 
 @Entity({ name: 'events' })
 export class Event {
@@ -32,4 +34,10 @@ export class Event {
 
   @OneToMany(() => CompensationEvent, (compensation_event: CompensationEvent) => compensation_event.event_id)
   compensation_event: CompensationEvent[];
+
+  @OneToMany(() => Record, (record: Record) => record.event_id)
+  record: Record[];
+
+  @OneToMany(() => Task, (task: Task) => task.event_id)
+  tasks: Task[];
 }
